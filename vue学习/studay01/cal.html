@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>day01</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<div id="app">
+		<h1>计算器</h1>
+		A:<input type="text" name="" id="" value="" v-model="a" />
+		<select id="" v-model="fuhao">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		B:<input type="text" name="" id="" value="" v-model="b" />
+		<hr>
+		<button @click="cal">运算</button>
+		<div :style="res">
+			结果：{{result}}
+		</div>
+		<hr>
+		<h1>跑吗</h1>
+		<hr>
+		<button @click="start">开始跑</button>
+		<button @click="stop">暂停</button>
+		<div v-text="pao"></div>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				a: '',
+				b: '',
+				result: '',
+				fuhao: '',
+				pao: "上海自来水来自海上~~~",
+				times:'',
+				res: {
+					backgroundColor: 'pink'
+				}
+			},
+			methods: {
+				cal() {
+					this.result = eval(parseInt(this.a) + this.fuhao + parseInt(this.b))
+				},
+				start() {
+					clearInterval(this.times)
+					this.times = setInterval(() => {
+						str1 = this.pao.substring(0, 1)
+						str2 = this.pao.substring(1)
+						this.pao = str2 + str1
+					}, 100)
+				},
+				stop(){
+					clearInterval(this.times)
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>
